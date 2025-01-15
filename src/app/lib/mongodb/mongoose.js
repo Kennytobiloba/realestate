@@ -1,24 +1,19 @@
 import mongoose from "mongoose";
 
-let intialized = false;
+const MONGO_URI = process.env.MONGO_URI;
+// console.log( MONGO_URI, " MONGO_URI")
 
-export const connect = async () => {
-    mongoose.set("strictQuery", true)
-    return
-
-     try {
-         await mongoose.connect(process.env.MONGODB, {
-            dbName:"real-estate",
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useFindAndModify: false,
-            
-
-         })
-        intialized = true
-        console.log("mongodb connected")
-     } catch (error) {
-        console.log("failed to connect", error)   
-     }
-
-}
+export const connectToDatabase = async () => {
+    if (mongoose.connection.readyState === 0) {
+        try {
+            await mongoose.connect(MONGO_URI, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            });
+            console.log("Connected to MongoDB");
+        } catch (error) {
+            console.error("Error connecting to MongoDB:", error);
+            throw error;
+        }
+    }
+};

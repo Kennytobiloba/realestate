@@ -2,7 +2,7 @@ import User from "../models/users.model";
 import { connectToDatabase } from "../mongodb/mongoose";
 
  
-export const createOrUpdateUser = async (
+export const  createOrUpdateUser = async (
     id,
     first_name,
     last_name,
@@ -27,7 +27,7 @@ export const createOrUpdateUser = async (
     }
 }
 
- export const delectUser = async (id) => {
+ export const deleteUser = async (id) => {
     try {
         await connectToDatabase()
         await User.deleteOne({clerkId: id})

@@ -1,8 +1,9 @@
 import { Webhook } from 'svix';
-import { headers } from 'next/headers';
+import { headers } from 'next/headers'
 
 import { clerkClient } from '@clerk/nextjs/server';
 import { createOrUpdateUser, deleteUser } from '@/app/lib/action/user';
+
 
 export async function POST(req) {
   const SIGNING_SECRET = process.env.SIGNING_SECRET;
@@ -56,6 +57,7 @@ export async function POST(req) {
 
   if (eventType === 'user.created' || eventType === 'user.updated') {
     const { first_name, last_name, image_url, email_addresses } = evt?.data;
+    console.log("firstname", first_name , eventType)
     try {
       const user = await createOrUpdateUser(
         id,
@@ -64,6 +66,7 @@ export async function POST(req) {
         image_url,
         email_addresses
       );
+      console.log("firstname", first_name)
       if (user && eventType === 'user.created') {
         try {
           await clerkClient.users.updateUserMetadata(id, {

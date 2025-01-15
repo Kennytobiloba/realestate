@@ -44,10 +44,6 @@ export async function POST(req) {
   if (eventType === 'user.created' || eventType === 'user.updated') {
     const { first_name, last_name, image_url, email_addresses } = evt?.data || {};
 
-    if (!first_name || !last_name || !email_addresses) {
-      console.error('Error: Missing required fields in webhook data');
-      return new Response('Error: Missing data', { status: 400 });
-    }
 
     try {
       const user = await createOrUpdateUser(first_name, last_name, image_url, email_addresses);

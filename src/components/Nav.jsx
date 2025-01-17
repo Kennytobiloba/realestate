@@ -70,6 +70,13 @@ const Nav = () => {
                 </Link>
               )
             )}
+            <SignedIn>
+            <Link
+              href={"/post"}
+              className="text-[18px] text-white hover:text-green-400
+               cursor-pointer">Post a house</Link>
+
+            </SignedIn>
              <SignedOut>
               <Link
               href={"/sign-in"}

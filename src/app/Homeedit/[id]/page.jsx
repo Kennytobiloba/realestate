@@ -1,12 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import Image from "next/image";
-import estateImg from "../components/assests/estate.jpg";
-import Nav from "./Nav";
-import CloudImage from "./CloudImage";
+import estateImg from "../../../components/assests/estate.jpg";
+import Nav from "../../../components/Nav";
+import CloudImage from "../../../components/CloudImage";
 import toast, { Toaster } from 'react-hot-toast';
+import { useParams } from "next/navigation";
 
-const Posthouse = () => {
+const page = () => {
+    const {id} = useParams()
+    // console.log("id", id)
   const [formData, setFormData] = useState({
     image: "",
     Housename: "",
@@ -26,6 +29,60 @@ const Posthouse = () => {
   });
   // console.log(formData.image, "image")
   const [isLoading,  setIsLoading] = useState(false)
+  const [formLoading, setFormLoading]  = useState(true)
+
+//   get all data
+
+useEffect(()=> {
+    getHouse()
+    // fetchProperties()
+  },[])
+  
+  const getHouse = async() => {
+    setFormLoading(true)
+   try {
+    const respond = await fetch("/api/house/", {
+      method:"GET",
+      headers:{
+       "Content-Type": "application/json"
+      }
+   })
+      const data = await respond.json()
+     if(!respond){
+      toast.error("failed to fectch data")
+      setFormLoading(false)
+     }else{
+      const Housedatas = data.houses  
+      const  dataarray = Array.isArray(Housedatas) ? Housedatas : [Housedatas]
+      const Housedata = dataarray.find((item) => item._id === id)
+      // console.log("housedata" , Housedata.)   
+      setFiles(Housedata.image)
+      setFormData({
+        Housename:Housedata.Housename,
+        address: Housedata.address,
+        description: Housedata.description,
+        category: Housedata.category,
+        properties:  {
+          parking:Housedata.properties[0].parking,
+          furnished:Housedata.properties[0].furnished,
+          other:Housedata.properties[0].other,
+        },
+        regularPrice: Housedata.regularPrice,
+        discountPrice:Housedata.discountPrice,
+        numberbath:Housedata.numberbath,
+        numberbed:Housedata.numberbed,
+        image:Housedata.image
+      }
+      )
+      setFormLoading(false) 
+     }  
+   } catch (error) {
+    console.log("error", error)
+    
+   }
+  
+  }
+        
   // image  uploading
    const [file, setFiles] = useState();
     const handleImageChange = (e) => {
@@ -90,7 +147,7 @@ const Posthouse = () => {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    console.log(id, "id");
     if (formData.discountPrice > formData.regularPrice) {
       toast.error("Discount price cannot exceed regular price.");
       return;
@@ -101,39 +158,19 @@ const Posthouse = () => {
     }
     try {
       const respond = await fetch("/api/house/", {
-        method: "POST",
-        body: JSON.stringify(formData),
+        method: "PUT",
+        body: JSON.stringify({formData, id}),
         headers: {
           "Content-Type": "application/json",
         },
       });
-
       const data = await respond.json();
       if (!respond.ok) {
         throw new Error(`HTTP error! status: ${respond.status}`);
       }else{
-        toast.success("Successfully created!")
-        console.log("Successfully created:", data);
-        setFormData({
-          image: "",
-          Housename: "",
-          address: "",
-          description: "",
-          category: "sell", // Default category
-          properties: {
-            parking: false,
-            furnished: false,
-            other: false,
-          },
-          regularPrice: 0,
-          discountPrice: 0,
-          numberbed: 0,
-          numberbath: 0,
-          numbertoilet: 0,
-        })
-      }
-
-      
+        toast.success(data.message)      
+        getHouse()     
+      }   
     } catch (error) {
       console.log("Failed to create", error);
     }
@@ -161,9 +198,18 @@ const Posthouse = () => {
           <div className="relative flex justify-center items-center min-h-screen z-10">
             <div className="bg-white mt-28 p-8 rounded-lg shadow-lg w-full max-w-2xl opacity-90">
               <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
-                Create a Listing
+                Edit a Listing
               </h1>
-              <div className="mt-6">
+              {
+                formLoading ? (
+                  <div className="text-center">
+                  <div className="loader animate-spin border-4 border-teal-500 border-t-transparent rounded-full w-16 h-16 mx-auto"></div>
+                  <p className="mt-4 text-teal-600 font-medium">Information Loading...</p>
+                </div>
+                 
+                ) : (
+                <div>
+                   <div className="mt-6">
                 <form onSubmit={handleImageSubmit}>
                   <input type="file" onChange={handleImageChange} />
                   <button
@@ -193,7 +239,7 @@ const Posthouse = () => {
                       className="border p-2 rounded-md shadow-md
                        focus:outline-none focus:ring-2 focus:ring-teal-500"
                       placeholder="Enter property name"
-                      value={formData.Housename}
+                      value={formData?.Housename}
                       onChange={handleChange}
                       required
                     />
@@ -213,7 +259,7 @@ const Posthouse = () => {
                       className="border p-2 rounded-md shadow-md 
                       focus:outline-none focus:ring-2 focus:ring-teal-500"
                       placeholder="Enter property address"
-                      value={formData.address}
+                      value={formData?.address}
                       onChange={handleChange}
                       required
                     />
@@ -236,7 +282,7 @@ const Posthouse = () => {
                       className="border p-2 rounded-md shadow-md 
                       focus:outline-none focus:ring-2 focus:ring-teal-500"
                       placeholder="0"
-                      value={formData.numberbed}
+                      value={formData?.numberbed}
                       onChange={handleChange}
                     />
                   </div>
@@ -254,7 +300,7 @@ const Posthouse = () => {
                       className="border p-2 rounded-md shadow-md 
                       focus:outline-none focus:ring-2 focus:ring-teal-500"
                       placeholder="0"
-                      value={formData.numberbath}
+                      value={formData?.numberbath}
                       onChange={handleChange}
                     />
                   </div>
@@ -272,7 +318,7 @@ const Posthouse = () => {
                       className="border p-2 rounded-md shadow-md 
                       focus:outline-none focus:ring-2 focus:ring-teal-500"
                       placeholder="0"
-                      value={formData.numbertoilet}
+                      value={formData?.numbertoilet}
                       onChange={handleChange}
                     />
                   </div>
@@ -294,7 +340,7 @@ const Posthouse = () => {
                       className="border p-2 rounded-md shadow-md 
                       focus:outline-none focus:ring-2 focus:ring-teal-500"
                       placeholder="Enter price"
-                      value={formData.regularPrice}
+                      value={formData?.regularPrice}
                       onChange={handleChange}
                     />
                   </div>
@@ -312,7 +358,7 @@ const Posthouse = () => {
                       className="border p-2 rounded-md shadow-md 
                       focus:outline-none focus:ring-2 focus:ring-teal-500"
                       placeholder="Enter discount price"
-                      value={formData.discountPrice}
+                      value={formData?.discountPrice}
                       onChange={handleChange}
                     />
                   </div>
@@ -331,7 +377,7 @@ const Posthouse = () => {
                     name="category"
                     className="border p-2 rounded-md shadow-md 
                     focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    value={formData.category}
+                    value={formData?.category}
                     onChange={handleChange}
                     required
                   >
@@ -354,7 +400,7 @@ const Posthouse = () => {
                     className="border p-2 rounded-md shadow-md 
                     focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder="Enter property description"
-                    value={formData.description}
+                    value={formData?.description}
                     onChange={handleChange}
                     required
                   />
@@ -396,6 +442,13 @@ const Posthouse = () => {
                   </button>
                 </div>
               </form>
+
+                </div>
+                  
+
+                )
+              }
+             
              
             </div>
           </div>
@@ -405,4 +458,4 @@ const Posthouse = () => {
   );
 };
 
-export default Posthouse;
+export default page;

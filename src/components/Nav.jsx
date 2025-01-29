@@ -48,14 +48,15 @@ const Nav = () => {
       <div className="w-[90%] mx-auto py-4 flex flex-col gap-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <h1 className="text-white font-playwrite text-xl leading-6 lg:text-2xl lg:leading-9 font-bold">
+          <h1 className="text-white font-playwrite text-xl
+           leading-6 lg:text-2xl lg:leading-9 font-bold">
             Sahand <br /> Estate
           </h1>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex gap-8">
             {[
-              {name:"Home", path:""},
+              {name:"Home", path:"/"},
               {name: "About", path:""},
               {name:"Properties", path:""}, 
               // {name:"Sign In", path:"/sign-in"}
@@ -64,7 +65,8 @@ const Nav = () => {
                 <Link
                  href={item?.path}
                   key={item?.name}
-                  className="text-[18px] text-white hover:text-green-400 cursor-pointer"
+                  className="text-[18px] text-white
+                   hover:text-green-400 cursor-pointer"
                 >
                   {item?.name}
                 </Link>
@@ -75,6 +77,11 @@ const Nav = () => {
               href={"/post"}
               className="text-[18px] text-white hover:text-green-400
                cursor-pointer">Post a house</Link>
+                <Link
+              href={"/dashboard"}
+              className="text-[18px] text-white hover:text-green-400
+               cursor-pointer">Dashboard</Link>
+
 
             </SignedIn>
              <SignedOut>

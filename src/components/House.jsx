@@ -5,32 +5,26 @@ import Image from "next/image";
 import Link from "next/link";
 
 const HouseCard = ({ house, isloading, keys }) => {
-  console.log("house", house);
-
-  
   return (
-    <>
     <Link href={`/singlepage/${house?._id}`}>
-      <div
-      href={`/singlepage/${house?._id}`}
-        className="bg-white rounded-lg shadow-md p-6">
-        <div className="mb-4">
+      <div className="bg-white rounded-lg shadow-md p-6 w-full custom-range:w-full lg:w-[350px] lg:h-[450px] flex flex-col">
+        {/* Image Container */}
+        <div className="relative w-full h-[200px] mb-4">
           {house?.image ? (
             <Image
               src={house.image}
               alt="House Image"
-              width={300}
-              height={200}
-              style={{ objectFit: "cover", width: "100%", height: "auto" }}
-              className="rounded-md"
+              fill
+              className="rounded-md object-cover"
             />
           ) : (
-            <div className="w-full h-[200px] bg-gray-200 rounded-md flex items-center justify-center">
+            <div className="w-full h-full bg-gray-200 rounded-md flex items-center justify-center">
               <span className="text-gray-500">No Image Available</span>
             </div>
           )}
         </div>
 
+        {/* House Info */}
         <h2 className="text-xl font-bold mb-2">{house?.Housename}</h2>
         <p className="text-gray-600 mb-2">{house?.address}</p>
 
@@ -74,8 +68,7 @@ const HouseCard = ({ house, isloading, keys }) => {
 
         <p className="text-gray-600">{house?.description}</p>
       </div>
-      </Link>
-    </>
+    </Link>
   );
 };
 

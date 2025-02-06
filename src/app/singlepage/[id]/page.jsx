@@ -26,8 +26,7 @@ const page = () => {
       const data = await respond.json()
       if (!respond) {
         toast.error("Failed to fetch data")
-      } else {
-        
+      } else {  
         const Housedatas = data.houses  
         const dataarray = Array.isArray(Housedatas) ? Housedatas : [Housedatas]
         const Housedata = dataarray.find((item) => item._id === id)

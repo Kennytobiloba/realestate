@@ -66,7 +66,7 @@ const page = () => {
   const name = user?.firstName || 'Guest';
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-950"> 
+    <div className="flex justify-center items-center h-screen bg-gray-950 lg:mt-2 mt-16" > 
       <div className="text-center">
         <h1 className="text-3xl font-bold mb-4 text-white">Welcome, {name}!</h1>
         <p className="text-lg mb-6 text-white w-3/4 mx-auto">
@@ -92,7 +92,7 @@ const page = () => {
           </div>
         </div>
 
-        <div className="mt-8 lg:w-[50%] mx-auto">
+        <div className=" mt-8 w-[50%] mx-auto overflow-hidden">
           <Bar options={options} data={data} /> 
         </div> 
 

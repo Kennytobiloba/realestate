@@ -1,11 +1,16 @@
-import React from "react";
-import bgImage from "../components/assests/estate.jpg";
+import React from 'react'
+import bgImage from "../../components/assests/home.jpg";
 import Image from "next/image";
-import Nav from "./Nav";
+import Nav from "../../components/Nav";
+import FeaturedPropertics from '@/components/FeaturedPropertics';
+import Book from '@/components/Book';
+import Footer from '@/components/Footer';
 
-const Hero = () => {
+const page = () => {
   return (
-    <div className="relative w-[90%] mx-auto md:h-screen h-[70vh]
+    <>
+    <div>
+     <div className="relative w-[90%] mx-auto md:h-screen h-[70vh]
       mt-10 rounded-2xl lg:rounded-3xl  overflow-hidden">
       <Nav />
       {/* Background Image */}
@@ -22,22 +27,25 @@ const Hero = () => {
       {/* Ensure the button and text are above the image using z-index */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center lg:w-[50%] mx-auto text-center lg:mt-12">
         {/* Responsive heading */}
-        <h4 className="text-center capitalize text-[16px] sm:text-[22px] lg:text-xl font-roboto text-white font-bold">
-          Discover Your Dream Home with Us
+        <h4 className="text-center capitalize text-[16px] sm:text-[22px] 
+        lg:text-xl font-roboto text-white ">
+        Properties
         </h4>
         <h1 className="text-white text-[30px] sm:text-[70px] lg:text-[70px] font-semibold mt-2 sm:mt-4 text-center lg:leading-[78px] leading-tight">
-          Find the Perfect Property for Your Lifestyle
+        Looking to Buy, Sell, Rent, Invest or Manage?
         </h1>
         {/* Button */}
-        <button
-          className="mt-6 px-6 py-3 text-white font-bold text-sm sm:text-base lg:text-lg rounded-full 
-                     bg-green-500 hover:bg-green-600 transition-all duration-300 shadow-lg"
-        >
-          START SEARCHING
-        </button>
+       
       </div>
     </div>
-  );
-};
+    </div>
+    <FeaturedPropertics/>
+    <Book/>
+    <Footer/>
+    
+    </>
+    
+  )
+}
 
-export default Hero;
+export default page

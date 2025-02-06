@@ -57,8 +57,8 @@ const Nav = () => {
           <div className="hidden lg:flex gap-8">
             {[
               {name:"Home", path:"/"},
-              {name: "About", path:""},
-              {name:"Properties", path:""}, 
+              {name:"Properties", path:"/propertices"},
+              {name:"Become An Agent", path:"/Registeragent"},  
               // {name:"Sign In", path:"/sign-in"}
                 ].map(
               (item) => (
@@ -73,7 +73,7 @@ const Nav = () => {
               )
             )}
             <SignedIn>
-            <Link
+             <Link
               href={"/post"}
               className="text-[18px] text-white hover:text-green-400
                cursor-pointer">Post a house</Link>
@@ -152,21 +152,46 @@ const Nav = () => {
         {/* Mobile Navigation */}
         <div
           ref={scope}
-          className={`lg:hidden flex flex-col items-center gap-4 bg-black bg-opacity-90 py-6 rounded-lg overflow-hidden transition-all duration-300 ${
+          className={`lg:hidden flex flex-col items-center gap-4 bg-black
+             bg-opacity-90 py-6 rounded-lg overflow-hidden transition-all duration-300 ${
             menuOpen ? "block" : "hidden"
           }`}
         >
-          {["Home", "About", "Services", "Properties", "Sign In"].map(
+          {[
+             {name:"Home", path:"/"},
+             {name: "About", path:""},
+             {name:"Properties", path:"/propertice"},
+             {name:"Become An Agent", path:"/Registeragent"},  
+          ].map(
             (item) => (
-              <h3
-                key={item}
+              <Link
+                href={item?.path}
+                key={item.name}
                 onClick={closeMenu}
                 className="nav-links text-[18px] text-white hover:text-green-400 cursor-pointer"
               >
-                {item}
-              </h3>
+                {item.name}
+              </Link>
             )
           )}
+          <SignedIn>
+             <Link
+              href={"/post"}
+              className="text-[18px] text-white hover:text-green-400
+               cursor-pointer">Post a house</Link>
+                <Link
+              href={"/dashboard"}
+              className="text-[18px] text-white hover:text-green-400
+               cursor-pointer">Dashboard</Link>
+
+
+            </SignedIn>
+             <SignedOut>
+              <Link
+              href={"/sign-in"}
+              className="text-[18px] text-white hover:text-green-400
+               cursor-pointer">Sign In</Link>
+              </SignedOut>
           {/* Social Icons */}
           <div className="flex gap-4 mt-4 text-lg">
             <span className="text-white hover:text-green-400">

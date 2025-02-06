@@ -118,7 +118,7 @@ const Page = () => {
         />
         <Link
           href={"/post"}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
+          className="bg-green-900 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600"
           onClick={() => toast.info('Create Apartment clicked!')}
         >
           Create Apartment
@@ -129,7 +129,7 @@ const Page = () => {
       <div className="overflow-x-auto bg-white">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-green-900 text-white">
               <th className="text-left px-4 py-2 border-b">Name</th>
               <th className="text-left px-4 py-2 border-b">Category</th>
               <th className="text-left px-4 py-2 border-b">Status</th>
@@ -142,7 +142,7 @@ const Page = () => {
               <tr>
                 <td colSpan="5" className="text-center py-16 bg-white">
                   <div className="flex justify-center items-center space-x-4">
-                    <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
+                    <div className="w-16 h-16 border-4 border-green-500 border-t-transparent border-solid rounded-full animate-spin"></div>
                     <span className="text-lg font-medium">Loading...</span>
                   </div>
                 </td>
@@ -155,7 +155,7 @@ const Page = () => {
                   <td className="px-4 py-2 border-b">
                   <button
                     className={`px-3 py-1 rounded-md text-white ${
-                      item.status === 'Rent' ? 'bg-green-500' : 'bg-red-500'
+                      item.status === 'Rent' ? 'bg-green-500' : 'bg-green-900'
                     }`}
                     onClick={() => openModal(item)}
                   >
@@ -167,7 +167,7 @@ const Page = () => {
                   <div className="flex justify-center gap-4">
                     <Link
                       href={`/Homeedit/${item?._id}`  }
-                      className="flex items-center text-blue-500 hover:text-blue-700"
+                      className="flex items-center text-green-900 hover:text-green-700"
                     >
                       <FaEdit className="mr-2" /> Edit
                     </Link>
@@ -198,7 +198,7 @@ const Page = () => {
               key={index}
               className={`px-3 py-1 text-sm rounded-md ${
                 currentPage === index + 1
-                  ? 'bg-blue-500 text-white'
+                  ? 'bg-green-500 text-white'
                   : 'bg-gray-200 text-gray-700'
               } hover:bg-blue-400 hover:text-white`}
               onClick={() => setCurrentPage(index + 1)}

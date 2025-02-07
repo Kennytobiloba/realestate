@@ -108,10 +108,12 @@ const Page = () => {
   return (
     <div className="p-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 w-ful 
+      overflow-x-auto flex-wrap lg:gap-2 gap-4 lg:flex-nowrap">
         <input
           type="text"
-          className="border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          className="border border-gray-300 rounded-lg w-full lg:w-3/5 px-4 py-2 shadow-sm
+           focus:ring-2 focus:ring-blue-400 focus:outline-none"
           placeholder="Search by apartment name"
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
@@ -123,10 +125,10 @@ const Page = () => {
         >
           Create Apartment
         </Link>
-      </div>
-
+      </div>    
       {/* Table */}
       <div className="overflow-x-auto bg-white">
+       
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr className="bg-green-900 text-white">

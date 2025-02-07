@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 const Page = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
     fetchAppointment();
   }, []);
@@ -18,7 +19,6 @@ const Page = () => {
         }
       });
       const data = await respond.json();
-      console.log("data", data.data);
       if (respond.ok) {
         setAppointments(data.data);
       }
@@ -29,28 +29,26 @@ const Page = () => {
     }
   };
 
-  const delectAppointment = async (id) => {
-     try {
-        const respond = await fetch("/api/appointment", {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body:JSON.stringify({ id })
-          });
-        const data = await respond.json();
-        console.log(data, "data")
-        if(respond.ok){
-         toast.success("Appointment Delected Successfully")
-         fetchAppointment()  
-        }else{
-            toast.error("Failed to delete appointment")
-        }    
-     } catch (error) {
-        console.log("Error", error)
-        
-     }
-  }
+  const deleteAppointment = async (id) => {
+    try {
+      const respond = await fetch("/api/appointment", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id })
+      });
+      const data = await respond.json();
+      if (respond.ok) {
+        toast.success("Appointment Deleted Successfully");
+        fetchAppointment();  
+      } else {
+        toast.error("Failed to delete appointment");
+      }    
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
 
   return (
     <div className="p-6 bg-green-800">
@@ -61,24 +59,32 @@ const Page = () => {
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-4 bg-gray-200 p-3 rounded-md font-semibold min-w-max">
-            <div>Message</div>
-            <div>Name</div>
-            <div>Email</div>
-            <div>Action</div>
-          </div>
-          {appointments.map((appointment) => (
-            <div key={appointment.id} className="grid grid-cols-4 text-white bg-green-800
-             p-3 border-b items-center min-w-max">
-              <div>{appointment.message}</div>
-              <div>{appointment.name}</div>
-              <div>{appointment.email}</div>
-              <button
-              onClick={()=>delectAppointment(appointment._id)}
-               className="bg-red-500 text-white px-3 py-1
-               rounded hover:bg-red-600">Delete</button>
-            </div>
-          ))}
+          <table className="w-full border-collapse border border-gray-200 min-w-max">
+            <thead>
+              <tr className="bg-gray-200 text-left text-gray-700">
+                <th className="p-3 border">Message</th>
+                <th className="p-3 border">Name</th>
+                <th className="p-3 border">Email</th>
+                <th className="p-3 border">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {appointments.map((appointment) => (
+                <tr key={appointment.id} className="text-white bg-green-800 border-b">
+                  <td className="p-3 border break-words">{appointment.message}</td>
+                  <td className="p-3 border break-words">{appointment.name}</td>
+                  <td className="p-3 border break-words">{appointment.email}</td>
+                  <td className="p-3 border">
+                    <button
+                      onClick={() => deleteAppointment(appointment._id)}
+                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

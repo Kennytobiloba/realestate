@@ -44,10 +44,12 @@ const HouseSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  status:{
+  status: {
     type: String,
-    enum: ["available", "sold", "rented"]
-  }
+    enum: ["Available", "sold", "Rented"],
+    default: "Available", // Fix the typo here
+  },
+ 
 });
 
 const Houesemodel = mongoose.models?.House || mongoose.model("House", HouseSchema); 

@@ -4,10 +4,9 @@ import img from "../components/assests/woman.jpg"
 
 const Connect = () => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 bg-white shadow-sm
-     p-8 lg:px-10 w-[90%] mx-auto lg:rounded-3xl rounded-2xl gap-6 mt-10 lg:h-[100vh]'>
+    <div className='grid grid-cols-1 sm:grid-cols-2  shadow-sm p-8 lg:px-10 w-[90%] mx-auto lg:rounded-3xl rounded-2xl gap-6 mt-10  custom-range:h-auto lg:h-[100vh]'>
 
-      <div className='w-full relative h-64 sm:h-full'>
+      <div className='w-full relative lg:h-64 sm:h-full custom-range:h-auto'>
         <Image
           src={img}
           objectFit='cover'

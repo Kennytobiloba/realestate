@@ -92,9 +92,9 @@ export async function POST(req) {
    export async function PUT(req){
      await connectToDatabase()
      try {
-      const {id, formData} = await req.json()
-      console.log(id, formData)
-      await Houesemodel.findByIdAndUpdate (id,  { $set: formData } ,{new:true , runValidators: true,})
+      const {id, status} = await req.json()
+      console.log(id,  status, "info")
+      await Houesemodel.findByIdAndUpdate(id, { $set: { status } }, { new: true, runValidators: true });
        return new Response(JSON.stringify({message:"Updated Successfully"},
         {
           status: 200,

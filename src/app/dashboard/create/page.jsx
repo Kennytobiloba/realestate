@@ -12,6 +12,7 @@ const Page = () => {
   const [house, setHouse] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedHouse, setSelectedHouse] = useState(null);
+  console.log(selectedHouse, "id")
 
   const rowsPerPage = 8;
 
@@ -61,7 +62,8 @@ const Page = () => {
   };
 
   const openModal = (house) => {
-    setSelectedHouse(house);
+    console.log("house", house)
+    setSelectedHouse(house._id);
     setModalOpen(true);
   };
 
@@ -70,13 +72,14 @@ const Page = () => {
     setSelectedHouse(null);
   };
 
-  const changeStatus = async (status) => {
-    if (!selectedHouse) return;
+  const changeStatus = async ( status) => {
+    // if (!selectedHouse) return;
+    console.log("selexted fun", selectedHouse , status)
 
     try {
-      const respond = await fetch(`/api/house/${selectedHouse._id}`, {
-        method: 'PATCH',
-        body: JSON.stringify({ status }),
+      const respond = await fetch(`/api/house`, {
+        method: 'PUT',
+        body: JSON.stringify({id:selectedHouse , status}),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -157,9 +160,9 @@ const Page = () => {
                   <td className="px-4 py-2 border-b">
                   <button
                     className={`px-3 py-1 rounded-md text-white ${
-                      item.status === 'Rent' ? 'bg-green-500' : 'bg-green-900'
+                      item.status === 'rented' ? 'bg-green-500' : 'bg-green-900'
                     }`}
-                    onClick={() => openModal(item)}
+                    onClick={() =>  openModal(item)}
                   >
                     {item.status || 'Available'}
                   </button>
@@ -219,15 +222,15 @@ const Page = () => {
             <div className="flex gap-4">
               <button
                 className="bg-green-500 text-white px-4 py-2 rounded-md"
-                onClick={() => changeStatus('Rent')}
+                onClick={() => changeStatus('Rented')}
               >
                 Rent
               </button>
               <button
                 className="bg-red-500 text-white px-4 py-2 rounded-md"
-                onClick={() => changeStatus('Sell')}
+                onClick={() => changeStatus('Available')}
               >
-                Sell
+                Available
               </button>
             </div>
             <button

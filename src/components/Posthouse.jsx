@@ -5,6 +5,7 @@ import estateImg from "../components/assests/estate.jpg";
 import Nav from "./Nav";
 import CloudImage from "./CloudImage";
 import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from "next/navigation";
 
 const Posthouse = () => {
   const [formData, setFormData] = useState({
@@ -26,6 +27,7 @@ const Posthouse = () => {
   });
   // console.log(formData.image, "image")
   const [isLoading,  setIsLoading] = useState(false)
+  const router = useRouter()
   // image  uploading
    const [file, setFiles] = useState();
     const handleImageChange = (e) => {
@@ -99,6 +101,7 @@ const Posthouse = () => {
        toast.error("You are required to upload a Image")
        return;
     }
+    setIsLoading(true)
     try {
       const respond = await fetch("/api/house/", {
         method: "POST",
@@ -112,8 +115,10 @@ const Posthouse = () => {
       if (!respond.ok) {
         throw new Error(`HTTP error! status: ${respond.status}`);
       }else{
+        setIsLoading(false)
         toast.success("Successfully created!")
-        console.log("Successfully created:", data);
+        router.push("/dashboard/create")
+        // console.log("Successfully created:", data);
         setFormData({
           image: "",
           Housename: "",
@@ -143,7 +148,7 @@ const Posthouse = () => {
     <>
       <div>
         <div className="relative min-h-screen">
-          <div className="relative z-10">
+          <div className="relative z-50">
             <Nav />
            
           </div>
@@ -385,16 +390,23 @@ const Posthouse = () => {
                
 
                 {/* Submit Button */}
-                <div className="text-center mt-6">
-                  <button
-                    type="submit"
-                    className="bg-teal-600 text-white px-6 py-3 rounded-lg 
-                    shadow-md hover:bg-teal-700 focus:outline-none
-                    focus:ring-2 focus:ring-teal-500"
-                  >
-                    Submit Listing
-                  </button>
-                </div>
+                <button
+                type="submit"
+                className="bg-teal-600 text-white px-4 py-2 rounded-md shadow-md flex justify-center items-center"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <div className="flex items-center">
+                    <svg className="animate-spin h-5 w-5 mr-2 border-2 border-white border-t-transparent rounded-full" viewBox="0 0 24 24"></svg>
+                    Processing...
+                  </div>
+                ) : (
+                  "Submit"
+                )}
+              </button>
+
+              
+                
               </form>
              
             </div>

@@ -4,18 +4,19 @@ import img from "../components/assests/woman.jpg"
 
 const Connect = () => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2  shadow-sm p-8 lg:px-10 w-[90%] mx-auto lg:rounded-3xl rounded-2xl gap-6 mt-10  custom-range:h-auto lg:h-[100vh]'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 shadow-sm w-[90%]   mx-auto gap-6    mt-10 custom-range:h-auto lg:h-[100vh]'>
 
-      <div className='w-full relative lg:h-64 sm:h-full custom-range:h-auto'>
+      {/* Image Container */}
+      <div className='w-full h-full relative lg:h-auto sm:h-full custom-range:h-auto'>
         <Image
           src={img}
-          objectFit='cover'
-          layout='fill'
           alt='img'
-          className='rounded-xl' // Optional: adds rounded corners to the image
+          layout='fill'
+          className='object-cover w-full h-full rounded-xl'
         />
       </div>
 
+      {/* Content Section */}
       <div>
         <h3 className="text-4xl sm:text-5xl lg:leading-[70px]">
           Connecting people with perfect homes is our passion.

@@ -54,7 +54,7 @@ const Nav = () => {
           </h1>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex gap-8">
+          <div className="hidden custom-range:hidden lg:flex gap-8">
             {[
               {name:"Home", path:"/"},
               {name:"Properties", path:"/propertices"},
@@ -93,7 +93,7 @@ const Nav = () => {
           </div>
  
           {/* Social Icons */}
-          <div className="hidden lg:flex gap-4 text-base lg:text-lg items-center">
+          <div className="hidden custom-range:hidden lg:flex gap-4 text-base lg:text-lg items-center">
            <SignedIn>
             <UserButton/>
             </SignedIn>
@@ -118,7 +118,7 @@ const Nav = () => {
           </div>
 
           {/* Hamburger Menu */}
-          <div className="block lg:hidden cursor-pointer" onClick={handleToggle}>
+          <div className="block  custom-range:block lg:hidden cursor-pointer" onClick={handleToggle}>
             {menuOpen ? (
               <X className="text-white text-3xl" />
             ) : (
@@ -152,7 +152,7 @@ const Nav = () => {
         {/* Mobile Navigation */}
         <div
           ref={scope}
-          className={`lg:hidden flex flex-col items-center gap-4 bg-black
+          className={`lg:hidden custom-range:flex flex flex-col items-center gap-4 bg-black
              bg-opacity-90 py-6 rounded-lg overflow-hidden transition-all duration-300 ${
             menuOpen ? "block" : "hidden"
           }`}

@@ -168,18 +168,38 @@ const Posthouse = () => {
               <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
                 Create a Listing
               </h1>
-              <div className="mt-6">
-                <form onSubmit={handleImageSubmit}>
-                  <input type="file" onChange={handleImageChange} />
-                  <button
-                    type="submit"
-                    className="bg-gray-400 text-white px-2 py-2 mb-6"
-                    disabled={isLoading} // Disable button while uploading
-                  >
-                    {isLoading ? "Uploading..." : "Upload Image"}
-                  </button>
-                </form>
+              <div className="flex flex-col space-y-2">
+              <label className="text-lg font-medium text-teal-600">Upload Image</label>
+              <div className="relative border border-gray-300 p-2 rounded-md shadow-md w-full flex items-center justify-between">
+                <span className="text-gray-500">{file ? file.name : "No file selected"}</span>
+                <label className="bg-teal-500 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-teal-600">
+                  Choose Image
+                  <input type="file" onChange={handleImageChange} className="hidden" />
+                </label>
               </div>
+
+              {/* Image Preview */}
+              {file && (
+                <div className="mt-2 flex justify-center">
+                  <Image
+                    src={URL.createObjectURL(file)}
+                    alt="Preview"
+                    width={120}
+                    height={120}
+                    className="rounded-md border shadow-md"
+                  />
+                </div>
+              )}
+
+              {/* Upload Button */}
+              <button
+                onClick={handleImageSubmit}
+                className="bg-teal-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-teal-600 w-full"
+                disabled={isLoading}
+              >
+                {isLoading ? "Uploading..." : "Upload"}
+              </button>
+            </div>
 
               <form className="space-y-6 mt-4" onSubmit={onSubmit}>
                 {/* Name and Address */}
@@ -403,11 +423,10 @@ const Posthouse = () => {
                 ) : (
                   "Submit"
                 )}
-              </button>
+              </button> 
+              </form>
 
               
-                
-              </form>
              
             </div>
           </div>

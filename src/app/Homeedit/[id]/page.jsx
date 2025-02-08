@@ -5,10 +5,11 @@ import estateImg from "../../../components/assests/estate.jpg";
 import Nav from "../../../components/Nav";
 import CloudImage from "../../../components/CloudImage";
 import toast, { Toaster } from 'react-hot-toast';
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 const page = () => {
     const {id} = useParams()
+    const router = useRouter()
     // console.log("id", id)
   const [formData, setFormData] = useState({
     image: "",
@@ -117,6 +118,7 @@ useEffect(()=> {
           setFormData({...formData, image:data.secure_url})
         
           toast.success("upload successfully")
+          router.push("/dashboard/create")
         }
       } catch (error) {
         console.log("Error", error);

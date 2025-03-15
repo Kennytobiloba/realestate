@@ -25,13 +25,15 @@ const page = () => {
       <div className="absolute inset-0 bg-opacity-50 bg-black rounded-3xl"></div>
 
       {/* Ensure the button and text are above the image using z-index */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center lg:w-[50%] mx-auto text-center lg:mt-12">
+       <div className="absolute inset-0 z-10 flex flex-col items-center 
+       justify-center lg:w-[50%] mx-auto text-center lg:mt-12 lg:px-2 px-4">
         {/* Responsive heading */}
         <h4 className="text-center capitalize text-[16px] sm:text-[22px] 
         lg:text-xl font-roboto text-white ">
         Properties
         </h4>
-        <h1 className="text-white text-[30px] sm:text-[70px] lg:text-[70px] font-semibold mt-2 sm:mt-4 text-center lg:leading-[78px] leading-tight">
+        <h1 className="text-white text-[30px] sm:text-[70px] lg:text-[70px] 
+        font-semibold mt-2 sm:mt-4 text-center lg:leading-[78px] leading-tight">
         Looking to Buy, Sell, Rent, Invest or Manage?
         </h1>
         {/* Button */}

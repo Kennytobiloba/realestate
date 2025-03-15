@@ -26,52 +26,49 @@ const Posthouse = () => {
     numbertoilet: 0,
   });
   // console.log(formData.image, "image")
-  const [isLoading,  setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   // image  uploading
-   const [file, setFiles] = useState();
-    const handleImageChange = (e) => {
-      setFiles(e.target.files[0]);
-    };
+  const [file, setFiles] = useState();
+  const handleImageChange = (e) => {
+    setFiles(e.target.files[0]);
+  };
   //   console.log("file", file)
-    const handleImageSubmit = async (e) => {
-      e.preventDefault();
-      if(!file){
-        toast.error("you have not uploaded your file")
-      }
-      setIsLoading(true)
-      try {
-       
-        const formDatas = new FormData();
-        formDatas.append("file", file);
-        formDatas.append("upload_preset", "real-estate");
-        const response = await fetch(
-          "https://api.cloudinary.com/v1_1/dkocpumx7/image/upload",{
-          method:"post",
-          body:formDatas   
-          }      
-        );
-        const data = await response.json()
-        console.log("file", file)
-        // console.log("upload successfully", data.secure_url)
-        if(!response.ok){
-          setIsLoading(false)
-          console.log("errorr failed to upload")
-        }else{
-          setIsLoading(false)
-          setFormData({...formData, image:data.secure_url})
-        
-          toast.success("upload successfully")
-        }
-      } catch (error) {
-        console.log("Error", error);
-        
-      }
-    };
+  const handleImageSubmit = async (e) => {
+    e.preventDefault();
+    if (!file) {
+      toast.error("you have not uploaded your file")
+    }
+    setIsLoading(true)
+    try {
 
+      const formDatas = new FormData();
+      formDatas.append("file", file);
+      formDatas.append("upload_preset", "real-estate");
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/dkocpumx7/image/upload", {
+        method: "post",
+        body: formDatas
+      }
+      );
+      const data = await response.json()
+      console.log("file", file)
+      // console.log("upload successfully", data.secure_url)
+      if (!response.ok) {
+        setIsLoading(false)
+        console.log("errorr failed to upload")
+      } else {
+        setIsLoading(false)
+        setFormData({ ...formData, image: data.secure_url })
 
+        toast.success("upload successfully")
+      }
+    } catch (error) {
+      console.log("Error", error);
+
+    }
+  };
   // image end
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -97,9 +94,9 @@ const Posthouse = () => {
       toast.error("Discount price cannot exceed regular price.");
       return;
     }
-    if(!formData.image){
-       toast.error("You are required to upload a Image")
-       return;
+    if (!formData.image) {
+      toast.error("You are required to upload a Image")
+      return;
     }
     setIsLoading(true)
     try {
@@ -114,7 +111,7 @@ const Posthouse = () => {
       const data = await respond.json();
       if (!respond.ok) {
         throw new Error(`HTTP error! status: ${respond.status}`);
-      }else{
+      } else {
         setIsLoading(false)
         toast.success("Successfully created!")
         router.push("/dashboard/create")
@@ -138,7 +135,7 @@ const Posthouse = () => {
         })
       }
 
-      
+
     } catch (error) {
       console.log("Failed to create", error);
     }
@@ -150,7 +147,7 @@ const Posthouse = () => {
         <div className="relative min-h-screen">
           <div className="relative z-50">
             <Nav />
-           
+
           </div>
           <div className="absolute inset-0">
             <Image
@@ -163,43 +160,44 @@ const Posthouse = () => {
             <div className="absolute inset-0 bg-black opacity-50 z-0" />
           </div>
 
-          <div className="relative flex justify-center items-center min-h-screen z-10">
-            <div className="bg-white mt-28 p-8 rounded-lg shadow-lg w-full max-w-2xl opacity-90">
+          <div className="relative flex justify-center items-center min-h-screen z-10 lg:px-4 px-4">
+            <div className="bg-white mt-28 p-8 rounded-lg shadow-lg w-full max-w-2xl opacity-90 mb-10">
               <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
                 Create a Listing
               </h1>
               <div className="flex flex-col space-y-2">
               <label className="text-lg font-medium text-teal-600">Upload Image</label>
-              <div className="relative border border-gray-300 p-2 rounded-md shadow-md w-full flex items-center justify-between">
+              <div className="relative border border-gray-300 p-2 rounded-md shadow-md w-full
+                flex items-center justify-between">
                 <span className="text-gray-500">{file ? file.name : "No file selected"}</span>
                 <label className="bg-teal-500 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-teal-600">
                   Choose Image
-                  <input type="file" onChange={handleImageChange} className="hidden" />
-                </label>
-              </div>
-
-              {/* Image Preview */}
-              {file && (
-                <div className="mt-2 flex justify-center">
-                  <Image
-                    src={URL.createObjectURL(file)}
-                    alt="Preview"
-                    width={120}
-                    height={120}
-                    className="rounded-md border shadow-md"
-                  />
+                <input type="file" onChange={handleImageChange} className="hidden" />
+                 </label>
                 </div>
-              )}
 
-              {/* Upload Button */}
-              <button
-                onClick={handleImageSubmit}
-                className="bg-teal-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-teal-600 w-full"
-                disabled={isLoading}
-              >
-                {isLoading ? "Uploading..." : "Upload"}
-              </button>
-            </div>
+                {/* Image Preview */}
+                {file && (
+                  <div className="mt-2 flex justify-center">
+                    <Image
+                      src={URL.createObjectURL(file)}
+                      alt="Preview"
+                      width={120}
+                      height={120}
+                      className="rounded-md border shadow-md"
+                    />
+                  </div>
+                )}
+
+                {/* Upload Button */}
+                <button
+                  onClick={handleImageSubmit}
+                  className="bg-teal-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-teal-600 w-full"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Uploading..." : "Upload"}
+                </button>
+              </div>
 
               <form className="space-y-6 mt-4" onSubmit={onSubmit}>
                 {/* Name and Address */}
@@ -407,27 +405,27 @@ const Posthouse = () => {
                   ))}
                 </div>
                 {/* uploade image */}
-               
+
 
                 {/* Submit Button */}
                 <button
-                type="submit"
-                className="bg-teal-600 text-white px-4 py-2 rounded-md shadow-md flex justify-center items-center"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <div className="flex items-center">
-                    <svg className="animate-spin h-5 w-5 mr-2 border-2 border-white border-t-transparent rounded-full" viewBox="0 0 24 24"></svg>
-                    Processing...
-                  </div>
-                ) : (
-                  "Submit"
-                )}
-              </button> 
+                  type="submit"
+                  className="bg-teal-600 text-white px-4 py-2 rounded-md shadow-md flex justify-center items-center"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <div className="flex items-center">
+                      <svg className="animate-spin h-5 w-5 mr-2 border-2 border-white border-t-transparent rounded-full" viewBox="0 0 24 24"></svg>
+                      Processing...
+                    </div>
+                  ) : (
+                    "Submit"
+                  )}
+                </button>
               </form>
 
-              
-             
+
+
             </div>
           </div>
         </div>

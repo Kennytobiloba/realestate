@@ -111,8 +111,8 @@ const Page = () => {
   return (
     <div className="p-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6 w-ful 
-      overflow-x-auto flex-wrap lg:gap-2 gap-4 lg:flex-nowrap">
+        <div className="flex justify-between items-center mb-6 w-ful 
+        overflow-x-auto flex-wrap lg:gap-2 gap-4 lg:flex-nowrap">
         <input
           type="text"
           className="border border-gray-300 rounded-lg w-full lg:w-3/5 px-4 py-2 shadow-sm
@@ -147,7 +147,8 @@ const Page = () => {
               <tr>
                 <td colSpan="5" className="text-center py-16 bg-white">
                   <div className="flex justify-center items-center space-x-4">
-                    <div className="w-16 h-16 border-4 border-green-500 border-t-transparent border-solid rounded-full animate-spin"></div>
+                    <div className="w-16 h-16 border-4 border-green-500 border-t-transparent
+                     border-solid rounded-full animate-spin"></div>
                     <span className="text-lg font-medium">Loading...</span>
                   </div>
                 </td>

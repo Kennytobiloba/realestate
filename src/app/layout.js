@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css'; 
 import Head from "next/head";
 import "./globals.css";
+import Footer from "@/components/Footer";
 
 
 
@@ -45,6 +46,9 @@ export default function RootLayout({ children }) {
           <div className="bg-[#f9f8f2] w-full">
           <Toaster />
           {children}
+          </div>
+          <div className="w-full mx-auto ">
+          <Footer/>     
           </div>
         
         </body>

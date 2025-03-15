@@ -197,7 +197,7 @@ useEffect(()=> {
             <div className="absolute inset-0 bg-black opacity-50 z-0" />
           </div>
 
-          <div className="relative flex justify-center items-center min-h-screen z-10">
+          <div className="relative flex justify-center items-center min-h-screen z-10 lg:px-2 px-4">
             <div className="bg-white mt-28 p-8 rounded-lg shadow-lg w-full max-w-2xl opacity-90">
               <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
                 Edit a Listing

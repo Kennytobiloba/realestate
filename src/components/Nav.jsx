@@ -44,7 +44,7 @@ const Nav = () => {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <div className="absolute top-0 left-0 w-full z-20">
+    <div className="absolute top-0 left-0 w-full z-50">
       <div className="w-[90%] mx-auto py-4 flex flex-col gap-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -160,7 +160,7 @@ const Nav = () => {
           {[
              {name:"Home", path:"/"},
              {name: "About", path:""},
-             {name:"Properties", path:"/propertice"},
+             {name:"Properties", path:"/propertices"},
              {name:"Become An Agent", path:"/Registeragent"},  
           ].map(
             (item) => (

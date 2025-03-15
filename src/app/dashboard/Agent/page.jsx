@@ -50,19 +50,19 @@ const Page = () => {
   // fetch data
   const AgentFetch = async () => {
     setLoading(true);
-    try {
-      const respond = await fetch("/api/agent", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await respond.json();
-      //  console.log(data.data, "data")
-      if (respond.ok) {
-        setAgent(data.data);
-        setLoading(false);
-      }
+   try {
+    const respond = await fetch("/api/agent", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await respond.json();
+    //  console.log(data.data, "data")
+    if (respond.ok) {
+      setAgent(data.data);
+      setLoading(false);
+    }
     } catch (error) {}
   };
 

@@ -73,10 +73,10 @@ const AgentRegistrationForm = () => {
       </div>
 
       {/* Form Container */}
-      <div className="bg-white p-6 md:p-8 mt-6 rounded-lg shadow-lg w-[90%] max-w-md lg:max-w-lg absolute z-50">
-        <h2 className="text-xl font-bold text-center mb-4">Agent Registration</h2>
-
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="bg-white p-6 md:px-12 mt-6 rounded-lg shadow-lg 
+       w-[90%] max-w-md lg:max-w-lg absolute z-20 lg:px-2 px-6">
+       <h2 className="text-xl font-bold text-center mb-4">Agent Registration</h2>
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-4 px-4">
           {/* Name */}
           <div className="lg:col-span-1">
             <label htmlFor="name" className="block text-sm font-semibold">Name</label>

@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -66,6 +67,7 @@ const AgentRegistrationForm = () => {
   };
 
   return (
+  <>
     <div className="singlepage flex flex-col items-center justify-center min-h-screen relative">
       {/* Navbar */}
       <div className="z-50 w-full">
@@ -189,6 +191,8 @@ const AgentRegistrationForm = () => {
         </div>
       )}
     </div>
+    <Footer/>
+  </>
   );
 };
 

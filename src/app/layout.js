@@ -47,9 +47,7 @@ export default function RootLayout({ children }) {
           <Toaster />
           {children}
           </div>
-          <div className="w-full mx-auto ">
-          <Footer/>     
-          </div>
+          
         
         </body>
       </html>
